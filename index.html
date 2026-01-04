@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сутрешният Код | 79 Метаболитни Рецепти</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <div class="hero-badge">Здравословно Хранене</div>
+            <h1 class="hero-title">Сутрешният Код</h1>
+            <p class="hero-subtitle">79 Метаболитни Рецепти за Енергия и Баланс</p>
+            <p class="hero-author">от Вили Вилс</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <button class="nav-btn" onclick="showSection('intro')">УВОД</button>
+            
+            <div class="nav-dropdown">
+                <button class="nav-btn dropdown-trigger" onclick="toggleDropdown('morning-code')">
+                    СУТРЕШЕН КОД
+                    <span class="dropdown-icon">▼</span>
+                </button>
+                <div class="dropdown-menu" id="morning-code-menu">
+                    <button class="dropdown-item" onclick="showRecipes('metabolic-restart')">Метаболитен рестарт</button>
+                    <button class="dropdown-item" onclick="showRecipes('liquid-elixirs')">Течни еликсири</button>
+                    <button class="dropdown-item" onclick="showRecipes('energy-snacks')">Енергийни закуски</button>
+                    <button class="dropdown-item" onclick="showRecipes('lunch-restart')">Обядът като нов старт</button>
+                    <button class="dropdown-item" onclick="showRecipes('midday-meals')">Междинни хранения</button>
+                </div>
+            </div>
+            
+            <button class="nav-btn" onclick="showSection('lunch-code')">ОБЕДЕН КОД</button>
+            <button class="nav-btn" onclick="showSection('evening-code')">ВЕЧЕРЕН КОД</button>
+            <button class="nav-btn" onclick="showSection('conclusion')">ЗАКЛЮЧЕНИЕ</button>
+            <button class="nav-btn" onclick="showSection('about')">ЗА МЕН</button>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- Intro Section -->
+        <section id="intro-section" class="content-section active">
+            <div class="section-container">
+                <div class="intro-content">
+                    <h2 class="section-title">Пътят от хаоса до баланса</h2>
+                    <div class="intro-text">
+                        <p class="lead-paragraph">
+                            Здравей! Първо искам да ти кажа нещо важно: <strong>Не те познавам, но те разбирам.</strong>
+                        </p>
+                        <p>
+                            Познавам усещането, когато звънецът на будилника е като старт на нова битка. Знаеш, че денят ще е пълен с хора, задачи, очаквания – но за теб самата няма време.
+                        </p>
+                        <p>
+                            Бях точно там. В малкия град в Северна България, където израснах, ме научиха на дисциплина. Спортното училище ме научи да печеля. Но никой не ми показа как да се грижа за себе си в хаоса на ежедневието.
+                        </p>
+                        <p class="highlight-text">
+                            Когато станах майка на две деца, разбрах нещо страшно: <em>Можеш да даваш на всички наоколо, докато в теб самата не остане нищо.</em>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recipes Section -->
+        <section id="recipes-section" class="content-section">
+            <div class="section-container">
+                <!-- Category Header -->
+                <div class="category-header">
+                    <h2 id="category-title" class="category-title">Изберете категория</h2>
+                    <p id="category-description" class="category-description">
+                        Използвайте менюто "Сутрешен код" за да изберете категория рецепти
+                    </p>
+                    <div class="category-stats">
+                        <span id="category-count" class="stat-badge">0 рецепти</span>
+                    </div>
+                </div>
+
+                <!-- Filter & Search -->
+                <div class="filter-bar">
+                    <div class="search-box">
+                        <input 
+                            type="text" 
+                            id="search-input" 
+                            placeholder="Търси рецепта..." 
+                            oninput="filterRecipes()"
+                        >
+                        <span class="search-icon">🔍</span>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <select id="difficulty-filter" onchange="filterRecipes()">
+                            <option value="">Всички трудности</option>
+                            <option value="Много лесна">Много лесна</option>
+                            <option value="Лесна">Лесна</option>
+                            <option value="Средна">Средна</option>
+                        </select>
+                        
+                        <select id="time-filter" onchange="filterRecipes()">
+                            <option value="">Време за подготовка</option>
+                            <option value="fast">До 5 минути</option>
+                            <option value="medium">5-15 минути</option>
+                            <option value="slow">Над 15 минути</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Recipes Grid -->
+                <div id="recipes-grid" class="recipes-grid">
+                    <!-- Recipes will be populated here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Lunch Code Section (Placeholder) -->
+        <section id="lunch-code-section" class="content-section">
+            <div class="section-container">
+                <div class="coming-soon">
+                    <div class="coming-soon-icon">🍽️</div>
+                    <h2>Обеден Код</h2>
+                    <p>Скоро очаквайте...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Evening Code Section (Placeholder) -->
+        <section id="evening-code-section" class="content-section">
+            <div class="section-container">
+                <div class="coming-soon">
+                    <div class="coming-soon-icon">🌙</div>
+                    <h2>Вечерен Код</h2>
+                    <p>Скоро очаквайте...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusion Section -->
+        <section id="conclusion-section" class="content-section">
+            <div class="section-container">
+                <div class="conclusion-content">
+                    <h2 class="section-title">Твоето ново начало</h2>
+                    <div class="conclusion-text">
+                        <p class="lead-paragraph">
+                            Ако стигна до тук, значи нещо в тази книга те е докоснало. Може би е била една рецепта. Може би е била една мисъл. Може би просто е била идеята, че заслужаваш да се грижиш за себе си.
+                        </p>
+                        <p>
+                            Промяната не идва от перфекционизма. Идва от постоянството. Идва от избора да започнеш отново всяка сутрин.
+                        </p>
+                        <p class="signature">
+                            С любов и вяра в теб,<br>
+                            <strong>Вили Вилс</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about-section" class="content-section">
+            <div class="section-container">
+                <div class="about-content">
+                    <h2 class="section-title">За мен</h2>
+                    <div class="about-text">
+                        <p class="lead-paragraph">
+                            Аз съм Вили Вилс – родена в малък град в северна България, професионален спортист и майка на две деца.
+                        </p>
+                        <p>
+                            Завърших Спортно училище като професионален спортист, където развих дълбока страст към спорта и разбиране за ключовата роля на здравословната храна в постигането на резултати.
+                        </p>
+                        <p>
+                            В момента съумявам да се справям с ежедневните предизвикателства на майчинството, като същевременно поддържам енергия и баланс чрез принципите, които споделям в тази книга.
+                        </p>
+                        <p class="highlight-text">
+                            Тази книга е резултат от моя личен път – от хаоса към баланса, от умората към енергията, от "нямам време" към "давам си приоритет".
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Recipe Modal -->
+    <div id="recipe-modal" class="modal">
+        <div class="modal-overlay" onclick="closeRecipeModal()"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeRecipeModal()">×</button>
+            <div id="modal-recipe-content">
+                <!-- Recipe details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">© 2025 Вили Вилс. Всички права запазени.</p>
+            <p class="footer-subtitle">Сутрешният Код - 79 Метаболитни Рецепти</p>
+        </div>
+    </footer>
+
+    <script src="complete_recipes.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
