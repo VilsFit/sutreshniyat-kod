@@ -751,7 +751,7 @@ const recipesData = {
     },
     {
       id: 48,
-      name: "Пилешка гърда с броколи на пара",
+      name: "Пилешки гърди с броколи на пара",
       category: "lunch-restart",
       categoryName: "Обядът като нов старт",
       prepTime: "10 минути",
