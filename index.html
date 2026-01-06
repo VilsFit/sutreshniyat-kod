@@ -48,7 +48,19 @@
                 </div>
             </div>
             
-            <button class="nav-btn" onclick="showSection('lunch-code')">ОБЕДЕН КОД</button>
+            <div class="nav-dropdown">
+  <button class="nav-btn dropdown-trigger" onclick="toggleDropdown('lunch-code')">
+    ОБЕДЕН КОД
+    <span class="dropdown-icon">▼</span>
+  </button>
+  <div class="dropdown-menu" id="lunch-code-menu">
+    <button class="dropdown-item" onclick="showRecipes('lunch-salads')">Салати</button>
+    <button class="dropdown-item" onclick="showRecipes('lunch-sandwiches')">Сандвичи</button>
+    <button class="dropdown-item" onclick="showRecipes('lunch-meat')">Месни класици</button>
+    <button class="dropdown-item" onclick="showRecipes('lunch-vegetarian')">Вегетарианска сила</button>
+    <button class="dropdown-item" onclick="showRecipes('lunch-quick')">Бързи рецепти</button>
+  </div>
+</div>
             <button class="nav-btn" onclick="showSection('evening-code')">ВЕЧЕРЕН КОД</button>
             <button class="nav-btn" onclick="showSection('info')">ИНФОРМАЦИЯ</button>
             <button class="nav-btn" onclick="showSection('about')">ЗА МЕН</button>
