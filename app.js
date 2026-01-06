@@ -122,23 +122,25 @@ function closeMobileMenu() {
 function displayChapterSummary(categoryId) {
     const summaryContainer = document.getElementById('chapter-summary');
     
-    // Проверяваме дали има chapterInfo обект в complete_recipes.js
-    if (typeof chapterInfo !== 'undefined' && chapterInfo.id === categoryId) {
+    // Проверяваме дали има резюме за тази категория
+    if (typeof chapterSummaries !== 'undefined' && chapterSummaries[categoryId]) {
+        const chapter = chapterSummaries[categoryId];
+        
         // Показваме резюмето
         summaryContainer.innerHTML = `
             <div class="chapter-summary-content">
-                <div class="chapter-icon">${chapterInfo.icon}</div>
-                <h2 class="chapter-title">${chapterInfo.name}</h2>
-                <p class="chapter-description">${chapterInfo.description}</p>
+                <div class="chapter-icon">${chapter.icon}</div>
+                <h2 class="chapter-title">${chapter.name}</h2>
+                <p class="chapter-description">${chapter.description}</p>
                 <div class="chapter-summary-text">
-                    ${chapterInfo.summary.split('\n\n').map(para => 
-                        `<p>${para.trim()}</p>`
+                    ${chapter.summary.split('\n\n').map(para => 
+                        para.trim() ? `<p>${para.trim()}</p>` : ''
                     ).join('')}
                 </div>
                 <div class="chapter-meta">
-                    <span class="meta-item">📊 ${chapterInfo.count} рецепти</span>
-                    <span class="meta-item">⏱️ ${chapterInfo.prepTimeRange}</span>
-                    <span class="meta-item">⭐ ${chapterInfo.difficultyLevels.join(', ')}</span>
+                    <span class="meta-item">📊 ${chapter.count} рецепти</span>
+                    <span class="meta-item">⏱️ ${chapter.prepTimeRange}</span>
+                    <span class="meta-item">⭐ ${chapter.difficultyLevels.join(', ')}</span>
                 </div>
             </div>
         `;
