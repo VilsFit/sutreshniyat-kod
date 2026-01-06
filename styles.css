@@ -1022,7 +1022,10 @@ body {
     .nav-btn {
         width: 100%;
         text-align: center;
-        margin-top: var(--space-xs);
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-top: var(--space-xs);
+        padding-bottom: var(--space-xs);
     }
     
     .dropdown-menu {
