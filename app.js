@@ -464,4 +464,58 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
+
+// ════════════════════════════════════════════════════════════
+// ФУНКЦИЯ ЗА ПОКАЗВАНЕ НА ОБЕДНИ КАТЕГОРИИ
+// ════════════════════════════════════════════════════════════
+
+/**
+ * Показва рецепти от обедна категория
+ */
+function showLunchCategory(categoryId) {
+    console.log('🍽️ Зареждам обедна категория:', categoryId);
+    
+    // Затваряме всички dropdown-и
+    closeAllDropdowns();
+    closeMobileMenu();
+    
+    // Показваме recipes section
+    showSection('recipes');
+    
+    // Запазваме текущата категория
+    currentCategory = categoryId;
+    
+    // Показваме резюме на главата
+    displayChapterSummary(categoryId);
+    
+    // Намираме категорията
+    const category = categories.find(cat => cat.id === categoryId);
+    
+    if (!category) {
+        console.error('❌ Категория не е намерена:', categoryId);
+        if (typeof chapterSummaries !== 'undefined' && chapterSummaries[categoryId]) {
+            const chapterInfo = chapterSummaries[categoryId];
+            document.getElementById('category-title').textContent = chapterInfo.name;
+            document.getElementById('category-description').textContent = chapterInfo.description;
+            document.getElementById('category-count').textContent = `${chapterInfo.count} рецепти`;
+        }
+    } else {
+        document.getElementById('category-title').textContent = category.name;
+        document.getElementById('category-description').textContent = category.description;
+        document.getElementById('category-count').textContent = `${category.count} рецепти`;
+    }
+    
+    // Вземаме рецептите
+    const recipes = recipesData[categoryId] || [];
+    console.log(`📊 Намерени ${recipes.length} рецепти за ${categoryId}`);
+    
+    filteredRecipes = recipes;
+    renderRecipes(recipes);
+    
+    // Reset филтрите
+    document.getElementById('search-input').value = '';
+    document.getElementById('difficulty-filter').value = '';
+    document.getElementById('time-filter').value = '';
+}
+
 console.log('✨ JavaScript зареден успешно!');
