@@ -10,7 +10,7 @@ let filteredRecipes = [];
 // Инициализация при зареждане
 document.addEventListener('DOMContentLoaded', function() {
     console.log('✅ Сутрешният Код - Зареден!');
-    console.log(`📊 Общо рецепти: ${getTotalRecipesCount()}`);
+    console.log(`🍽️ Общо рецепти: ${getTotalRecipesCount()}`);
     
     // Показваме Увода по подразбиране
     showSection('intro');
@@ -138,7 +138,7 @@ function displayChapterSummary(categoryId) {
                     ).join('')}
                 </div>
                 <div class="chapter-meta">
-                    <span class="meta-item">📊 ${chapter.count} рецепти</span>
+                    <span class="meta-item">🍽️ ${chapter.count} рецепти</span>
                     <span class="meta-item">⏱️ ${chapter.prepTimeRange}</span>
                     <span class="meta-item">⭐ ${chapter.difficultyLevels.join(', ')}</span>
                 </div>
