@@ -1204,3 +1204,63 @@ body {
         padding: 24px;
     }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   COMPACT CHAPTER META STYLES
+   ═══════════════════════════════════════════════════════════ */
+
+.chapter-meta-compact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    padding: 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+    margin-bottom: 32px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.chapter-meta-compact .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #2c3e50;
+    padding: 8px 16px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
+}
+
+.chapter-meta-compact .meta-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+.chapter-meta-compact .meta-icon {
+    font-size: 20px;
+    line-height: 1;
+}
+
+.chapter-meta-compact .meta-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #495057;
+}
+
+/* Responsive за мобилни */
+@media (max-width: 768px) {
+    .chapter-meta-compact {
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px;
+    }
+    
+    .chapter-meta-compact .meta-item {
+        width: 100%;
+        justify-content: center;
+    }
+}
