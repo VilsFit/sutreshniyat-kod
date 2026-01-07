@@ -117,36 +117,35 @@ function closeMobileMenu() {
 }
 
 /**
- * Показва резюме на главата над рецептите
+ * Показва компактна информация за главата
  */
 function displayChapterSummary(categoryId) {
     const summaryContainer = document.getElementById('chapter-summary');
     
-    // Проверяваме дали има резюме за тази категория
+    // Проверяваме дали има информация за тази категория
     if (typeof chapterSummaries !== 'undefined' && chapterSummaries[categoryId]) {
         const chapter = chapterSummaries[categoryId];
         
-        // Показваме резюмето
+        // Показваме само компактна информация
         summaryContainer.innerHTML = `
-            <div class="chapter-summary-content">
-                <div class="chapter-icon">${chapter.icon}</div>
-                <h2 class="chapter-title">${chapter.name}</h2>
-                <p class="chapter-description">${chapter.description}</p>
-                <div class="chapter-summary-text">
-                    ${chapter.summary.split('\n\n').map(para => 
-                        para.trim() ? `<p>${para.trim()}</p>` : ''
-                    ).join('')}
-                </div>
-                <div class="chapter-meta">
-                    <span class="meta-item">🍽️ ${chapter.count} рецепти</span>
-                    <span class="meta-item">⏱️ ${chapter.prepTimeRange}</span>
-                    <span class="meta-item">⭐ ${chapter.difficultyLevels.join(', ')}</span>
-                </div>
+            <div class="chapter-meta-compact">
+                <span class="meta-item">
+                    <span class="meta-icon">🍽️</span>
+                    <span class="meta-text">${chapter.count} рецепти</span>
+                </span>
+                <span class="meta-item">
+                    <span class="meta-icon">⏱️</span>
+                    <span class="meta-text">${chapter.prepTimeRange}</span>
+                </span>
+                <span class="meta-item">
+                    <span class="meta-icon">⭐</span>
+                    <span class="meta-text">${chapter.difficultyLevels.join(', ')}</span>
+                </span>
             </div>
         `;
         summaryContainer.style.display = 'block';
     } else {
-        // Скриваме резюмето ако няма информация
+        // Скриваме ако няма информация
         summaryContainer.style.display = 'none';
     }
 }
