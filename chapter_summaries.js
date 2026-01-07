@@ -79,7 +79,7 @@ const chapterSummaries = {
     
     icon: "🥗",
     count: 15,
-    prepTimeRange: "2-20 минути",
+    prepTimeRange: "8-35 минути",
     difficultyLevels: ["Много лесна", "Лесна", "Средна"]
   },
 
@@ -92,7 +92,7 @@ const chapterSummaries = {
     
     icon: "🥪",
     count: 15,
-    prepTimeRange: "2-20 минути",
+    prepTimeRange: "8-30 минути",
     difficultyLevels: ["Много лесна", "Лесна", "Средна"]
   },
 
@@ -105,8 +105,8 @@ const chapterSummaries = {
     
     icon: "🍖",
     count: 15,
-    prepTimeRange: "2-20 минути",
-    difficultyLevels: ["Много лесна", "Лесна", "Средна"]
+    prepTimeRange: "15-60 минути",
+    difficultyLevels: ["Лесна", "Средна"]
   },
 
   "lunch-vegetarian": {
@@ -118,8 +118,8 @@ const chapterSummaries = {
     
     icon: "🌿",
     count: 15,
-    prepTimeRange: "2-20 минути",
-    difficultyLevels: ["Много лесна", "Лесна", "Средна"]
+    prepTimeRange: "20-60 минути",
+    difficultyLevels: ["Лесна", "Средна"]
   },
 
   "lunch-quick": {
@@ -131,7 +131,7 @@ const chapterSummaries = {
     
     icon: "⏱️",
     count: 15,
-    prepTimeRange: "2-20 минути",
-    difficultyLevels: ["Много лесна", "Лесна", "Средна"]
+    prepTimeRange: "5-15 минути",
+    difficultyLevels: ["Много лесна", "Лесна"]
   }
 };
