@@ -93,68 +93,157 @@
         </section>
 
         <!-- Recipes Section -->
-        <section id="recipes-section" class="content-section">
-            <div class="section-container">
-                <!-- Category Header -->
-                <div class="category-header">
-                    <h2 id="category-title" class="category-title">Изберете категория</h2>
-                    <p id="category-description" class="category-description">
-                        Използвайте менюто "Сутрешен код" за да изберете категория рецепти
-                    </p>
-                    <div class="category-stats">
-                        <span id="category-count" class="stat-badge">0 рецепти</span>
-                    </div>
-                </div>
-
-                <!-- Chapter Summary (показва се над рецептите) -->
-                <div id="chapter-summary" class="chapter-summary" style="display: none;"></div>
-
-                <!-- Filter & Search -->
-                <div class="filter-bar">
-                    <div class="search-box">
-                        <input 
-                            type="text" 
-                            id="search-input" 
-                            placeholder="Търси рецепта..." 
-                            oninput="filterRecipes()"
-                        >
-                        <span class="search-icon">🔍</span>
-                    </div>
-                    
-                    <div class="filter-group">
-                        <select id="difficulty-filter" onchange="filterRecipes()">
-                            <option value="">Всички трудности</option>
-                            <option value="Много лесна">Много лесна</option>
-                            <option value="Лесна">Лесна</option>
-                            <option value="Средна">Средна</option>
-                        </select>
-                        
-                        <select id="time-filter" onchange="filterRecipes()">
-                            <option value="">Време за подготовка</option>
-                            <option value="fast">До 5 минути</option>
-                            <option value="medium">5-15 минути</option>
-                            <option value="slow">Над 15 минути</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Recipes Grid -->
-                <div id="recipes-grid" class="recipes-grid">
-                    <!-- Recipes will be populated here by JavaScript -->
-                </div>
+<section id="recipes-section" class="content-section">
+    <div class="section-container">
+        <!-- Category Header -->
+        <div class="category-header">
+            <h2 id="category-title" class="category-title">Изберете категория</h2>
+            <p id="category-description" class="category-description">
+                Използвайте менюто "Сутрешен код" или "Обеден код" за да изберете категория рецепти
+            </p>
+            <div class="category-stats">
+                <span id="category-count" class="stat-badge">0 рецепти</span>
             </div>
-        </section>
-
-        <!-- Evening Code Section (Placeholder) -->
-        <section id="evening-code-section" class="content-section">
-            <div class="section-container">
-                <div class="coming-soon">
-                    <div class="coming-soon-icon">🌙</div>
-                    <h2>Вечерен Код</h2>
-                    <p>Скоро очаквайте...</p>
-                </div>
+        </div>
+        
+        <!-- Chapter Summary (показва се над рецептите) -->
+        <div id="chapter-summary" class="chapter-summary" style="display: none;"></div>
+        
+        <!-- Filter & Search -->
+        <div class="filter-bar">
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    id="search-input" 
+                    placeholder="Търси рецепта..." 
+                    oninput="filterRecipes()"
+                >
+                <span class="search-icon">🔍</span>
             </div>
-        </section>
+            
+            <div class="filter-group">
+                <select id="difficulty-filter" onchange="filterRecipes()">
+                    <option value="">Всички трудности</option>
+                    <option value="Много лесна">Много лесна</option>
+                    <option value="Лесна">Лесна</option>
+                    <option value="Средна">Средна</option>
+                </select>
+                
+                <select id="time-filter" onchange="filterRecipes()">
+                    <option value="">Време за подготовка</option>
+                    <option value="fast">До 5 минути</option>
+                    <option value="medium">5-15 минути</option>
+                    <option value="slow">Над 15 минути</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- Recipes Grid -->
+        <div id="recipes-grid" class="recipes-grid">
+            <!-- Recipes will be populated here by JavaScript -->
+        </div>
+    </div>
+</section>
+
+<!-- Lunch Code Section (Обеден Код) -->
+<section id="lunch-code-section" class="content-section">
+    <div class="section-container">
+        <div class="category-header">
+            <h2 class="category-title">Обеден Код</h2>
+            <p class="category-description">
+                75 здравословни обедни рецепти в 5 категории - от бързи салати до пълноценни месни ястия
+            </p>
+        </div>
+        
+        <div class="lunch-categories-grid">
+            <!-- Салати -->
+            <div class="lunch-category-card">
+                <div class="category-icon">🥗</div>
+                <h3>Салати</h3>
+                <p class="category-time">8-35 минути</p>
+                <p class="category-desc">Свежи, ситни салати богати на протеини и фибри</p>
+                <div class="category-stats-row">
+                    <span class="mini-badge">15 рецепти</span>
+                    <span class="mini-badge">Средно 18 мин</span>
+                </div>
+                <button class="category-btn" onclick="showLunchCategory('lunch-salads')">
+                    Виж рецепти
+                </button>
+            </div>
+            
+            <!-- Сандвичи -->
+            <div class="lunch-category-card">
+                <div class="category-icon">🥪</div>
+                <h3>Сандвичи</h3>
+                <p class="category-time">8-30 минути</p>
+                <p class="category-desc">Балансирани сандвичи за енергия и ситост</p>
+                <div class="category-stats-row">
+                    <span class="mini-badge">15 рецепти</span>
+                    <span class="mini-badge">Средно 15 мин</span>
+                </div>
+                <button class="category-btn" onclick="showLunchCategory('lunch-sandwiches')">
+                    Виж рецепти
+                </button>
+            </div>
+            
+            <!-- Месни класици -->
+            <div class="lunch-category-card">
+                <div class="category-icon">🍗</div>
+                <h3>Месни класици</h3>
+                <p class="category-time">15-60 минути</p>
+                <p class="category-desc">Високопротеинови ястия с месо и риба</p>
+                <div class="category-stats-row">
+                    <span class="mini-badge">15 рецепти</span>
+                    <span class="mini-badge">Средно 34 мин</span>
+                </div>
+                <button class="category-btn" onclick="showLunchCategory('lunch-meat')">
+                    Виж рецепти
+                </button>
+            </div>
+            
+            <!-- Вегетарианска сила -->
+            <div class="lunch-category-card">
+                <div class="category-icon">🌱</div>
+                <h3>Вегетарианска сила</h3>
+                <p class="category-time">20-60 минути</p>
+                <p class="category-desc">Растителни ястия с боб, леща и нахут</p>
+                <div class="category-stats-row">
+                    <span class="mini-badge">15 рецепти</span>
+                    <span class="mini-badge">Средно 38 мин</span>
+                </div>
+                <button class="category-btn" onclick="showLunchCategory('lunch-vegetarian')">
+                    Виж рецепти
+                </button>
+            </div>
+            
+            <!-- Бързи рецепти -->
+            <div class="lunch-category-card">
+                <div class="category-icon">⚡</div>
+                <h3>Бързи рецепти</h3>
+                <p class="category-time">5-15 минути</p>
+                <p class="category-desc">Експресни обеди за заети хора</p>
+                <div class="category-stats-row">
+                    <span class="mini-badge">15 рецепти</span>
+                    <span class="mini-badge">Средно 9 мин</span>
+                </div>
+                <button class="category-btn" onclick="showLunchCategory('lunch-quick')">
+                    Виж рецепти
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Evening Code Section (Placeholder) -->
+<section id="evening-code-section" class="content-section">
+    <div class="section-container">
+        <div class="coming-soon">
+            <div class="coming-soon-icon">🌙</div>
+            <h2>Вечерен Код</h2>
+            <p>Скоро очаквайте...</p>
+        </div>
+    </div>
+</section>
 
         <!-- Info Section (Информация) -->
 <section id="info-section" class="content-section">
