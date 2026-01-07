@@ -4198,7 +4198,7 @@ const recipesData = {
       carbs: 45,
       fats: 18,
       image: null
-	],
+	},
 
 	{
       id: 81,
