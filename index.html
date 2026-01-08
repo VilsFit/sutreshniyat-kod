@@ -61,7 +61,19 @@
                     <button class="dropdown-item" onclick="showRecipes('lunch-quick')">Бързи рецепти</button>
                 </div>
             </div>
-            <button class="nav-btn" onclick="showSection('evening-code')">ВЕЧЕРЕН КОД</button>
+            <div class="nav-dropdown">
+                <button class="nav-btn dropdown-trigger" onclick="toggleDropdown('evening-code')">
+                    ВЕЧЕРЕН КОД
+                    <span class="dropdown-icon">▼</span>
+                </button>
+                <div class="dropdown-menu" id="evening-code-menu">
+                    <button class="dropdown-item" onclick="showEveningCategory('evening-one-pan')">Вечеря на тиган</button>
+                    <button class="dropdown-item" onclick="showEveningCategory('evening-protein')">Протеинова крепост</button>
+                    <button class="dropdown-item" onclick="showEveningCategory('evening-quick')">Бърза вечеря</button>
+                    <button class="dropdown-item" onclick="showEveningCategory('evening-classic')">Класическа вечеря</button>
+                    <button class="dropdown-item" onclick="showEveningCategory('evening-plant')">Растителна енергия</button>
+                </div>
+            </div>
             <button class="nav-btn" onclick="showSection('info')">ИНФОРМАЦИЯ</button>
             <button class="nav-btn" onclick="showSection('about')">ЗА МЕН</button>
         </div>
@@ -98,39 +110,33 @@
         <!-- Category Header -->
         <div class="category-header">
             <h2 id="category-title" class="category-title">Изберете категория</h2>
-            <p id="category-description" class="category-description">
-                Използвайте менюто "Сутрешен код" или "Обеден код" за да изберете категория рецепти
-            </p>
-            <div class="category-stats">
-                <span id="category-count" class="stat-badge">0 рецепти</span>
-            </div>
+            <p id="category-description" class="category-description"></p>
+            <div id="category-count" class="category-count"></div>
         </div>
         
-        <!-- Chapter Summary (показва се над рецептите) -->
+        <!-- Chapter Summary (показва се само когато е налично) -->
         <div id="chapter-summary" class="chapter-summary" style="display: none;"></div>
         
-        <!-- Filter & Search -->
-        <div class="filter-bar">
-            <div class="search-box">
-                <input 
-                    type="text" 
-                    id="search-input" 
-                    placeholder="Търси рецепта..." 
-                    oninput="filterRecipes()"
-                >
-                <span class="search-icon">🔍</span>
-            </div>
+        <!-- Filters -->
+        <div class="filters-section">
+            <input 
+                type="text" 
+                id="search-input" 
+                class="search-input" 
+                placeholder="Търси рецепта..."
+                onkeyup="filterRecipes()"
+            >
             
             <div class="filter-group">
-                <select id="difficulty-filter" onchange="filterRecipes()">
+                <select id="difficulty-filter" class="filter-select" onchange="filterRecipes()">
                     <option value="">Всички трудности</option>
                     <option value="Много лесна">Много лесна</option>
                     <option value="Лесна">Лесна</option>
                     <option value="Средна">Средна</option>
                 </select>
                 
-                <select id="time-filter" onchange="filterRecipes()">
-                    <option value="">Време за подготовка</option>
+                <select id="time-filter" class="filter-select" onchange="filterRecipes()">
+                    <option value="">Всички времена</option>
                     <option value="fast">До 5 минути</option>
                     <option value="medium">5-15 минути</option>
                     <option value="slow">Над 15 минути</option>
@@ -139,29 +145,31 @@
         </div>
         
         <!-- Recipes Grid -->
-        <div id="recipes-grid" class="recipes-grid">
-            <!-- Recipes will be populated here by JavaScript -->
-        </div>
+        <div id="recipes-container" class="recipes-grid"></div>
     </div>
 </section>
 
-<!-- Lunch Code Section (Обеден Код) -->
+<!-- Lunch Code Section -->
 <section id="lunch-code-section" class="content-section">
     <div class="section-container">
-        <div class="category-header">
-            <h2 class="category-title">Обеден Код</h2>
-            <p class="category-description">
-                75 здравословни обедни рецепти в 5 категории - от бързи салати до пълноценни месни ястия
-            </p>
+        <div class="lunch-intro">
+            <div class="lunch-header">
+                <div class="lunch-icon">🍽️</div>
+                <h2>Обеден код</h2>
+                <p class="lunch-tagline">Пълноценни обяди, които те задържат до вечерта</p>
+            </div>
+            <div class="lunch-description">
+                <p>Обедът е критичният момент на деня. Правилният избор ще те поддържа с енергия до вечерта. Грешният ще те остави тежка и сънлива.</p>
+            </div>
         </div>
-        
+
         <div class="lunch-categories-grid">
             <!-- Салати -->
             <div class="lunch-category-card">
                 <div class="category-icon">🥗</div>
                 <h3>Салати</h3>
                 <p class="category-time">8-35 минути</p>
-                <p class="category-desc">Свежи, ситни салати богати на протеини и фибри</p>
+                <p class="category-desc">Пълноценни салати с протеини и фибри</p>
                 <div class="category-stats-row">
                     <span class="mini-badge">15 рецепти</span>
                     <span class="mini-badge">Средно 18 мин</span>
@@ -176,7 +184,7 @@
                 <div class="category-icon">🥪</div>
                 <h3>Сандвичи</h3>
                 <p class="category-time">8-30 минути</p>
-                <p class="category-desc">Балансирани сандвичи за енергия и ситост</p>
+                <p class="category-desc">Удобни сандвичи за обяд в движение</p>
                 <div class="category-stats-row">
                     <span class="mini-badge">15 рецепти</span>
                     <span class="mini-badge">Средно 15 мин</span>
@@ -188,13 +196,13 @@
             
             <!-- Месни класици -->
             <div class="lunch-category-card">
-                <div class="category-icon">🍗</div>
+                <div class="category-icon">🍖</div>
                 <h3>Месни класици</h3>
                 <p class="category-time">15-60 минути</p>
-                <p class="category-desc">Високопротеинови ястия с месо и риба</p>
+                <p class="category-desc">Класически месни ястия за сила</p>
                 <div class="category-stats-row">
                     <span class="mini-badge">15 рецепти</span>
-                    <span class="mini-badge">Средно 34 мин</span>
+                    <span class="mini-badge">Средно 32 мин</span>
                 </div>
                 <button class="category-btn" onclick="showLunchCategory('lunch-meat')">
                     Виж рецепти
@@ -234,13 +242,95 @@
     </div>
 </section>
 
-<!-- Evening Code Section (Placeholder) -->
+<!-- Evening Code Section - НОВ! -->
 <section id="evening-code-section" class="content-section">
     <div class="section-container">
-        <div class="coming-soon">
-            <div class="coming-soon-icon">🌙</div>
-            <h2>Вечерен Код</h2>
-            <p>Скоро очаквайте...</p>
+        <div class="evening-intro">
+            <div class="evening-header">
+                <div class="evening-icon">🌙</div>
+                <h2>Вечерен код</h2>
+                <p class="evening-tagline">Балансирани вечери за качествен сън и възстановяване</p>
+            </div>
+            <div class="evening-description">
+                <p>Вечерята не е просто храна преди лягане. Тя определя качеството на съня ти и как ще се събудиш сутринта.</p>
+            </div>
+        </div>
+
+        <div class="evening-categories-grid">
+            <!-- Вечеря на тиган -->
+            <div class="evening-category-card">
+                <div class="category-icon">🍳</div>
+                <h3>Вечеря на тиган</h3>
+                <p class="category-time">15-200 минути</p>
+                <p class="category-desc">Едноблюдни рецепти с минимално миене</p>
+                <div class="category-stats-row">
+                    <span class="mini-badge">15 рецепти</span>
+                    <span class="mini-badge">One-pan meals</span>
+                </div>
+                <button class="category-btn" onclick="showEveningCategory('evening-one-pan')">
+                    Виж рецепти
+                </button>
+            </div>
+            
+            <!-- Протеинова крепост -->
+            <div class="evening-category-card">
+                <div class="category-icon">🥩</div>
+                <h3>Протеинова крепост</h3>
+                <p class="category-time">8-70 минути</p>
+                <p class="category-desc">Високо протеин за възстановяване</p>
+                <div class="category-stats-row">
+                    <span class="mini-badge">15 рецепти</span>
+                    <span class="mini-badge">40-55g протеин</span>
+                </div>
+                <button class="category-btn" onclick="showEveningCategory('evening-protein')">
+                    Виж рецепти
+                </button>
+            </div>
+            
+            <!-- Бърза вечеря -->
+            <div class="evening-category-card">
+                <div class="category-icon">⏱️</div>
+                <h3>Бърза вечеря</h3>
+                <p class="category-time">5-25 минути</p>
+                <p class="category-desc">Експресни вечери със супер храни</p>
+                <div class="category-stats-row">
+                    <span class="mini-badge">15 рецепти</span>
+                    <span class="mini-badge">Средно 13 мин</span>
+                </div>
+                <button class="category-btn" onclick="showEveningCategory('evening-quick')">
+                    Виж рецепти
+                </button>
+            </div>
+            
+            <!-- Класическа вечеря -->
+            <div class="evening-category-card">
+                <div class="category-icon">🍲</div>
+                <h3>Класическа вечеря</h3>
+                <p class="category-time">25-75 минути</p>
+                <p class="category-desc">Български класики обновени</p>
+                <div class="category-stats-row">
+                    <span class="mini-badge">15 рецепти</span>
+                    <span class="mini-badge">Comfort food</span>
+                </div>
+                <button class="category-btn" onclick="showEveningCategory('evening-classic')">
+                    Виж рецепти
+                </button>
+            </div>
+            
+            <!-- Растителна енергия -->
+            <div class="evening-category-card">
+                <div class="category-icon">🌱</div>
+                <h3>Растителна енергия</h3>
+                <p class="category-time">12-55 минути</p>
+                <p class="category-desc">100% вегетариански рецепти</p>
+                <div class="category-stats-row">
+                    <span class="mini-badge">15 рецепти</span>
+                    <span class="mini-badge">Растителен протеин</span>
+                </div>
+                <button class="category-btn" onclick="showEveningCategory('evening-plant')">
+                    Виж рецепти
+                </button>
+            </div>
         </div>
     </div>
 </section>
@@ -256,7 +346,7 @@
                 <div class="guide-step">
                     <div class="step-number">1</div>
                     <div class="step-content">
-                        <h3>Изберете категория</h3>
+                        <h3>Изберете категория - Сутрешен код</h3>
                         <p>Натиснете бутона <strong>"СУТРЕШЕН КОД"</strong> в менюто и изберете една от петте категории рецепти:</p>
                         <ul>
                             <li><strong>Метаболитен рестарт</strong> - Сутрешни рецепти за метаболитна оптимизация</li>
@@ -268,11 +358,11 @@
                     </div>
                 </div>
 
-                <!-- ✨ НОВ БЛОК - ОБЕДЕН КОД ✨ -->
+                <!-- ОБЕДЕН КОД -->
                 <div class="guide-step">
                     <div class="step-number">1.1</div>
                     <div class="step-content">
-                        <h3>Обеден Код - Категории</h3>
+                        <h3>Обеден код - Категории</h3>
                         <p>Натиснете бутона <strong>"ОБЕДЕН КОД"</strong> в менюто и изберете една от петте категории обедни рецепти:</p>
                         <ul>
                             <li><strong>Салати</strong> (8-35 мин) - Свежи, ситни салати богати на протеини и фибри</li>
@@ -280,6 +370,22 @@
                             <li><strong>Месни класици</strong> (15-60 мин) - Високопротеинови ястия с месо и риба</li>
                             <li><strong>Вегетарианска сила</strong> (20-60 мин) - Растителни ястия с боб, леща и нахут</li>
                             <li><strong>Бързи рецепти</strong> (5-15 мин) - Експресни обеди за заети хора</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- ВЕЧЕРЕН КОД - НОВ! -->
+                <div class="guide-step">
+                    <div class="step-number">1.2</div>
+                    <div class="step-content">
+                        <h3>Вечерен код - Категории</h3>
+                        <p>Натиснете бутона <strong>"ВЕЧЕРЕН КОД"</strong> в менюто и изберете една от петте категории вечерни рецепти:</p>
+                        <ul>
+                            <li><strong>Вечеря на тиган</strong> (15-200 мин) - Едноблюдни рецепти с минимално миене</li>
+                            <li><strong>Протеинова крепост</strong> (8-70 мин) - Високопротеинови вечери (40-55g)</li>
+                            <li><strong>Бърза вечеря</strong> (5-25 мин) - Експресни вечери със супер храни</li>
+                            <li><strong>Класическа вечеря</strong> (25-75 мин) - Български класики обновени</li>
+                            <li><strong>Растителна енергия</strong> (12-55 мин) - 100% вегетариански рецепти</li>
                         </ul>
                     </div>
                 </div>
@@ -298,99 +404,100 @@
                     </div>
                 </div>
                 
-                <!-- СТЪПКА 3 - ПРЕГЛЕДАЙТЕ ДЕТАЙЛИТЕ -->
+                <!-- СТЪПКА 3 - ИЗБЕРЕТЕ РЕЦЕПТА -->
                 <div class="guide-step">
                     <div class="step-number">3</div>
                     <div class="step-content">
-                        <h3>Прегледайте детайлите</h3>
-                        <p>Кликнете върху която и да е рецепта, за да видите пълна информация:</p>
-                                <ul>
-                                    <li><strong>Защо работи</strong> - Научно обяснение на ползите</li>
-                                    <li><strong>Съставки</strong> - Основни съставки и бустерни добавки</li>
-                                    <li><strong>Инструкции</strong> - Стъпка по стъпка как се приготвя</li>
-                                    <li><strong>Хранителна информация</strong> - Калории, протеин, въглехидрати, мазнини</li>
-                                    <li><strong>Специални техники</strong> - Професионални съвети за най-добър резултат</li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                        <div class="guide-step">
-                            <div class="step-number">4</div>
-                            <div class="step-content">
-                                <h3>Приготвяйте и се наслаждавайте</h3>
-                                <p>Следвайте инструкциите стъпка по стъпка. Всяка рецепта е:</p>
-                                <ul>
-                                    <li>✅ Тествана и оптимизирана</li>
-                                    <li>✅ С ясни и прости стъпки</li>
-                                    <li>✅ Създадена за максимална енергия и баланс</li>
-                                    <li>✅ Подходяща за натоварено ежедневие</li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                        <div class="info-tips">
-                            <h3>💡 Професионални съвети:</h3>
-                            <ul>
-                                <li><strong>Планирайте предварително</strong> - Прегледайте рецептите вечерта преди и си подгответе съставките</li>
-                                <li><strong>Експериментирайте</strong> - Не се страхувайте да адаптирате рецептите според вкуса си</li>
-                                <li><strong>Качествени съставки</strong> - Използвайте най-качествените съставки, които можете да си позволите</li>
-                                <li><strong>Консистентност</strong> - Най-добрите резултати идват от редовното хранене по този начин</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="info-note">
-                            <p><strong>Забележка:</strong> Всички рецепти са създадени с фокус върху метаболитната оптимизация, устойчива енергия и хранителен баланс. Те са част от холистичен подход към здравословното хранене.</p>
-                        </div>
+                        <h3>Изберете рецепта</h3>
+                        <p>Щракнете върху рецепта, за да видите пълната информация:</p>
+                        <ul>
+                            <li>Подробни стъпки за изпълнение</li>
+                            <li>Време за подготовка и готвене</li>
+                            <li>Ниво на трудност</li>
+                            <li>Калории и макронутриенти</li>
+                            <li>Професионални съвети и трикове</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- СТЪПКА 4 - СЪВЕТИ -->
+                <div class="guide-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Професионални съвети</h3>
+                        <p>Всяка рецепта включва:</p>
+                        <ul>
+                            <li><strong>WHY</strong> - Защо работи (научното обяснение)</li>
+                            <li><strong>TECHNIQUE</strong> - Професионални техники за най-добър резултат</li>
+                            <li><strong>HACK</strong> - Практични трикове от реалния живот</li>
+                        </ul>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
-        <!-- About Section -->
+        <!-- About Section (За мен) -->
         <section id="about-section" class="content-section">
             <div class="section-container">
                 <div class="about-content">
                     <h2 class="section-title">За мен</h2>
                     <div class="about-text">
                         <p class="lead-paragraph">
-                            Аз съм Вили Вилс – родена в малък град в северна България, професионален спортист и майка на две деца.
+                            Казвам се Вили Вилс и съм сертифициран Health Coach и експерт по персонална трансформация.
                         </p>
                         <p>
-                            Завърших Спортно училище като професионален спортист, където развих дълбока страст към спорта и разбиране за ключовата роля на здравословната храна в постигането на резултати.
+                            Моето пътуване започна в малък град в Северна България, където отраснах в семейство на треньори. Родителите ми ме научиха на дисциплина, спортното училище ме научи да печеля, но никой не ми показа как да се грижа за себе си в хаоса на ежедневието.
                         </p>
                         <p>
-                            В момента съумявам да се справям с ежедневните предизвикателства на майчинството, като същевременно поддържам енергия и баланс чрез принципите, които споделям в тази книга.
+                            Когато станах майка на две деца, разбрах нещо страшно: можеш да даваш на всички наоколо, докато в теб самата не остане нищо. Успехът навън изглеждаше перфектно, но вътре бях изтощена.
                         </p>
                         <p class="highlight-text">
-                            Тази книга е резултат от моя личен път – от хаоса към баланса, от умората към енергията, от "нямам време" към "давам си приоритет".
+                            Тогава реших: не мога да съм добра за никого, ако не съм добра за себе си.
                         </p>
+                        <p>
+                            Потърсих решение. Не само диета. Не само упражнения. Търсих СИСТЕМА. Нещо, което можех да използвам всеки ден, независимо колко е заето денят ми.
+                        </p>
+                        <p>
+                            Открих, че всичко започва със сутрешната храна. Не защото е "най-важното хранене" (макар че е), а защото е единственото хранене, което можех да КОНТРОЛИРАМ.
+                        </p>
+                        <p>
+                            Сутрешният Код е системата, която създадох за себе си. Сега я споделям с теб.
+                        </p>
+                        <div class="credentials">
+                            <h3>Квалификации:</h3>
+                            <ul>
+                                <li>Експерт по метаболитна оптимизация</li>
+                                <li>Специалист по хранене и енергиен баланс</li>
+                                <li>Над 5 години опит в трансформация на хранителни навици</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-    </main>
 
-    <!-- Recipe Modal -->
-    <div id="recipe-modal" class="modal">
-        <div class="modal-overlay" onclick="closeRecipeModal()"></div>
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeRecipeModal()">×</button>
-            <div id="modal-recipe-content">
-                <!-- Recipe details will be populated here -->
-            </div>
-        </div>
-    </div>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
-            <p class="footer-text">© 2025 Вили Вилс. Всички права запазени.</p>
-            <p class="footer-subtitle">Сутрешният Код - 79 Метаболитни Рецепти</p>
+            <p>© 2026 Сутрешният Код. Всички права запазени.</p>
+            <p>Създадено с ❤️ от Вили Вилс</p>
         </div>
     </footer>
 
-    <script src="complete_recipes.js"></script>
+    <!-- Recipe Modal -->
+    <div id="recipe-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
     <script src="chapter_summaries.js"></script>
+    <script src="complete_recipes.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
