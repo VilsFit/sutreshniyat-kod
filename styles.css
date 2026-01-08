@@ -493,32 +493,52 @@ body {
 .search-box {
     position: relative;
     flex: 1;
-    min-width: 250px;
+    min-width: 280px;
+    max-width: 500px;
 }
 
 .search-box input {
     width: 100%;
-    padding: var(--space-sm) var(--space-lg) var(--space-sm) var(--space-md);
+    padding: 0.875rem 1rem 0.875rem 3rem;
     border: 2px solid var(--gray-light);
-    border-radius: var(--radius-md);
+    border-radius: 50px;
     font-family: var(--font-body);
     font-size: 1rem;
-    transition: all 0.3s ease;
+    background: var(--white);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.search-box input::placeholder {
+    color: var(--gray-medium);
+    font-weight: 400;
+}
+
+.search-box input:hover {
+    border-color: var(--primary-green);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .search-box input:focus {
     outline: none;
     border-color: var(--primary-green);
-    box-shadow: 0 0 0 3px rgba(45, 90, 63, 0.1);
+    box-shadow: 0 0 0 4px rgba(45, 90, 63, 0.12), 0 4px 16px rgba(0, 0, 0, 0.1);
+    background: var(--white);
 }
 
 .search-icon {
     position: absolute;
-    right: var(--space-md);
+    left: 1.125rem;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 1.25rem;
+    font-size: 1.125rem;
+    color: var(--gray-medium);
     pointer-events: none;
+    transition: color 0.3s ease;
+}
+
+.search-box input:focus ~ .search-icon {
+    color: var(--primary-green);
 }
 
 .filter-group {
@@ -527,19 +547,33 @@ body {
 }
 
 .filter-group select {
-    padding: var(--space-sm) var(--space-md);
+    padding: 0.875rem 2.5rem 0.875rem 1rem;
     border: 2px solid var(--gray-light);
-    border-radius: var(--radius-md);
+    border-radius: 50px;
     font-family: var(--font-body);
     font-size: 0.9375rem;
+    font-weight: 500;
     background: var(--white);
+    color: var(--charcoal);
     cursor: pointer;
-    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 12px;
+}
+
+.filter-group select:hover {
+    border-color: var(--primary-green);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .filter-group select:focus {
     outline: none;
     border-color: var(--primary-green);
+    box-shadow: 0 0 0 4px rgba(45, 90, 63, 0.12), 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 /* Recipes Grid */
