@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сутрешният Код | 79 Метаболитни Рецепти</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <div class="hero-badge">Здравословно Хранене</div>
+            <h1 class="hero-title">Сутрешният Код</h1>
+            <p class="hero-subtitle">79 Метаболитни Рецепти за Енергия и Баланс</p>
+            <p class="hero-author">от Вили Вилс</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                <span>☰</span>
+            </button>
+            
+            <button class="nav-btn" onclick="showSection('intro')">УВОД</button>
+            
+            <div class="nav-dropdown">
+                <button class="nav-btn dropdown-trigger" onclick="toggleDropdown('morning-code')">
+                    СУТРЕШЕН КОД
+                    <span class="dropdown-icon">▼</span>
+                </button>
+                <div class="dropdown-menu" id="morning-code-menu">
+                    <button class="dropdown-item" onclick="showRecipes('metabolic-restart')">Метаболитен рестарт</button>
+                    <button class="dropdown-item" onclick="showRecipes('liquid-elixirs')">Течни еликсири</button>
+                    <button class="dropdown-item" onclick="showRecipes('energy-snacks')">Енергийни закуски</button>
+                    <button class="dropdown-item" onclick="showRecipes('lunch-restart')">Обядът като нов старт</button>
+                    <button class="dropdown-item" onclick="showRecipes('midday-meals')">Междинни хранения</button>
+                </div>
+            </div>
+            
+            <div class="nav-dropdown">
+                <button class="nav-btn dropdown-trigger" onclick="toggleDropdown('lunch-code')">
+                    ОБЕДЕН КОД
+                    <span class="dropdown-icon">▼</span>
+                </button>
+                <div class="dropdown-menu" id="lunch-code-menu">
+                    <button class="dropdown-item" onclick="showRecipes('lunch-salads')">Салати</button>
+                    <button class="dropdown-item" onclick="showRecipes('lunch-sandwiches')">Сандвичи</button>
+                    <button class="dropdown-item" onclick="showRecipes('lunch-meat')">Месни класици</button>
+                    <button class="dropdown-item" onclick="showRecipes('lunch-vegetarian')">Вегетарианска сила</button>
+                    <button class="dropdown-item" onclick="showRecipes('lunch-quick')">Бързи рецепти</button>
+                </div>
+            </div>
+            <button class="nav-btn" onclick="showSection('evening-code')">ВЕЧЕРЕН КОД</button>
+            <button class="nav-btn" onclick="showSection('info')">ИНФОРМАЦИЯ</button>
+            <button class="nav-btn" onclick="showSection('about')">ЗА МЕН</button>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- Intro Section -->
+        <section id="intro-section" class="content-section active">
+            <div class="section-container">
+                <div class="intro-content">
+                    <h2 class="section-title">Пътят от хаоса до баланса</h2>
+                    <div class="intro-text">
+                        <p class="lead-paragraph">
+                            Здравей! Първо искам да ти кажа нещо важно: <strong>Не те познавам, но те разбирам.</strong>
+                        </p>
+                        <p>
+                            Познавам усещането, когато звънецът на будилника е като старт на нова битка. Знаеш, че денят ще е пълен с хора, задачи, очаквания – но за теб самата няма време.
+                        </p>
+                        <p>
+                            Бях точно там. В малкия град в Северна България, където израснах, ме научиха на дисциплина. Спортното училище ме научи да печеля. Но никой не ми показа как да се грижа за себе си в хаоса на ежедневието.
+                        </p>
+                        <p class="highlight-text">
+                            Когато станах майка на две деца, разбрах нещо страшно: <em>Можеш да даваш на всички наоколо, докато в теб самата не остане нищо.</em>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recipes Section -->
+<section id="recipes-section" class="content-section">
+    <div class="section-container">
+        <!-- Category Header -->
+        <div class="category-header">
+            <h2 id="category-title" class="category-title">Изберете категория</h2>
+            <p id="category-description" class="category-description">
+                Използвайте менюто "Сутрешен код" или "Обеден код" за да изберете категория рецепти
+            </p>
+            <div class="category-stats">
+                <span id="category-count" class="stat-badge">0 рецепти</span>
+            </div>
+        </div>
+        
+        <!-- Chapter Summary (показва се над рецептите) -->
+        <div id="chapter-summary" class="chapter-summary" style="display: none;"></div>
+        
+        <!-- Filter & Search -->
+        <div class="filter-bar">
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    id="search-input" 
+                    placeholder="Търси рецепта..." 
+                    oninput="filterRecipes()"
+                >
+                <span class="search-icon">🔍</span>
+            </div>
+            
+            <div class="filter-group">
+                <select id="difficulty-filter" onchange="filterRecipes()">
+                    <option value="">Всички трудности</option>
+                    <option value="Много лесна">Много лесна</option>
+                    <option value="Лесна">Лесна</option>
+                    <option value="Средна">Средна</option>
+                </select>
+                
+                <select id="time-filter" onchange="filterRecipes()">
+                    <option value="">Време за подготовка</option>
+                    <option value="fast">До 5 минути</option>
+                    <option value="medium">5-15 минути</option>
+                    <option value="slow">Над 15 минути</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- Recipes Grid -->
+        <div id="recipes-grid" class="recipes-grid">
+            <!-- Recipes will be populated here by JavaScript -->
+        </div>
+    </div>
+</section>
+
+<!-- Lunch Code Section (Обеден Код) -->
+<section id="lunch-code-section" class="content-section">
+    <div class="section-container">
+        <div class="category-header">
+            <h2 class="category-title">Обеден Код</h2>
+            <p class="category-description">
+                75 здравословни обедни рецепти в 5 категории - от бързи салати до пълноценни месни ястия
+            </p>
+        </div>
+        
+        <div class="lunch-categories-grid">
+            <!-- Салати -->
+            <div class="lunch-category-card">
+                <div class="category-icon">🥗</div>
+                <h3>Салати</h3>
+                <p class="category-time">8-35 минути</p>
+                <p class="category-desc">Свежи, ситни салати богати на протеини и фибри</p>
+                <div class="category-stats-row">
+                    <span class="mini-badge">15 рецепти</span>
+                    <span class="mini-badge">Средно 18 мин</span>
+                </div>
+                <button class="category-btn" onclick="showLunchCategory('lunch-salads')">
+                    Виж рецепти
+                </button>
+            </div>
+            
+            <!-- Сандвичи -->
+            <div class="lunch-category-card">
+                <div class="category-icon">🥪</div>
+                <h3>Сандвичи</h3>
+                <p class="category-time">8-30 минути</p>
+                <p class="category-desc">Балансирани сандвичи за енергия и ситост</p>
+                <div class="category-stats-row">
+                    <span class="mini-badge">15 рецепти</span>
+                    <span class="mini-badge">Средно 15 мин</span>
+                </div>
+                <button class="category-btn" onclick="showLunchCategory('lunch-sandwiches')">
+                    Виж рецепти
+                </button>
+            </div>
+            
+            <!-- Месни класици -->
+            <div class="lunch-category-card">
+                <div class="category-icon">🍗</div>
+                <h3>Месни класици</h3>
+                <p class="category-time">15-60 минути</p>
+                <p class="category-desc">Високопротеинови ястия с месо и риба</p>
+                <div class="category-stats-row">
+                    <span class="mini-badge">15 рецепти</span>
+                    <span class="mini-badge">Средно 34 мин</span>
+                </div>
+                <button class="category-btn" onclick="showLunchCategory('lunch-meat')">
+                    Виж рецепти
+                </button>
+            </div>
+            
+            <!-- Вегетарианска сила -->
+            <div class="lunch-category-card">
+                <div class="category-icon">🌱</div>
+                <h3>Вегетарианска сила</h3>
+                <p class="category-time">20-60 минути</p>
+                <p class="category-desc">Растителни ястия с боб, леща и нахут</p>
+                <div class="category-stats-row">
+                    <span class="mini-badge">15 рецепти</span>
+                    <span class="mini-badge">Средно 38 мин</span>
+                </div>
+                <button class="category-btn" onclick="showLunchCategory('lunch-vegetarian')">
+                    Виж рецепти
+                </button>
+            </div>
+            
+            <!-- Бързи рецепти -->
+            <div class="lunch-category-card">
+                <div class="category-icon">⚡</div>
+                <h3>Бързи рецепти</h3>
+                <p class="category-time">5-15 минути</p>
+                <p class="category-desc">Експресни обеди за заети хора</p>
+                <div class="category-stats-row">
+                    <span class="mini-badge">15 рецепти</span>
+                    <span class="mini-badge">Средно 9 мин</span>
+                </div>
+                <button class="category-btn" onclick="showLunchCategory('lunch-quick')">
+                    Виж рецепти
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Evening Code Section (Placeholder) -->
+<section id="evening-code-section" class="content-section">
+    <div class="section-container">
+        <div class="coming-soon">
+            <div class="coming-soon-icon">🌙</div>
+            <h2>Вечерен Код</h2>
+            <p>Скоро очаквайте...</p>
+        </div>
+    </div>
+</section>
+
+        <!-- Info Section (Информация) -->
+<section id="info-section" class="content-section">
+    <div class="section-container">
+        <div class="info-content">
+            <h2 class="section-title">Как да използвам генератора</h2>
+            
+            <div class="info-guide">
+                <!-- СУТРЕШЕН КОД -->
+                <div class="guide-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Изберете категория</h3>
+                        <p>Натиснете бутона <strong>"СУТРЕШЕН КОД"</strong> в менюто и изберете една от петте категории рецепти:</p>
+                        <ul>
+                            <li><strong>Метаболитен рестарт</strong> - Сутрешни рецепти за метаболитна оптимизация</li>
+                            <li><strong>Течни еликсири</strong> - Бързи течни решения за моментална енергия</li>
+                            <li><strong>Енергийни закуски</strong> - Мощни закуски за устойчива енергия</li>
+                            <li><strong>Обядът като нов старт</strong> - Балансирани обедни решения</li>
+                            <li><strong>Междинни хранения</strong> - Снакс опции за поддържане на фокус</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- ✨ НОВ БЛОК - ОБЕДЕН КОД ✨ -->
+                <div class="guide-step">
+                    <div class="step-number">1.1</div>
+                    <div class="step-content">
+                        <h3>Обеден Код - Категории</h3>
+                        <p>Натиснете бутона <strong>"ОБЕДЕН КОД"</strong> в менюто и изберете една от петте категории обедни рецепти:</p>
+                        <ul>
+                            <li><strong>Салати</strong> (8-35 мин) - Свежи, ситни салати богати на протеини и фибри</li>
+                            <li><strong>Сандвичи</strong> (8-30 мин) - Балансирани сандвичи за енергия и ситост</li>
+                            <li><strong>Месни класици</strong> (15-60 мин) - Високопротеинови ястия с месо и риба</li>
+                            <li><strong>Вегетарианска сила</strong> (20-60 мин) - Растителни ястия с боб, леща и нахут</li>
+                            <li><strong>Бързи рецепти</strong> (5-15 мин) - Експресни обеди за заети хора</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- СТЪПКА 2 - ТЪРСЕНЕ И ФИЛТРИРАНЕ -->
+                <div class="guide-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Търсете и филтрирайте</h3>
+                        <p>Използвайте търсачката и филтрите, за да намерите точно това, което ви трябва:</p>
+                        <ul>
+                            <li><strong>Търсене по име</strong> - Въведете ключова дума (например "смути", "яйце", "овесени")</li>
+                            <li><strong>Филтър по трудност</strong> - Изберете "Много лесна", "Лесна" или "Средна"</li>
+                            <li><strong>Филтър по време</strong> - До 5 минути, 5-15 минути или над 15 минути</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- СТЪПКА 3 - ПРЕГЛЕДАЙТЕ ДЕТАЙЛИТЕ -->
+                <div class="guide-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Прегледайте детайлите</h3>
+                        <p>Кликнете върху която и да е рецепта, за да видите пълна информация:</p>
+                                <ul>
+                                    <li><strong>Защо работи</strong> - Научно обяснение на ползите</li>
+                                    <li><strong>Съставки</strong> - Основни съставки и бустерни добавки</li>
+                                    <li><strong>Инструкции</strong> - Стъпка по стъпка как се приготвя</li>
+                                    <li><strong>Хранителна информация</strong> - Калории, протеин, въглехидрати, мазнини</li>
+                                    <li><strong>Специални техники</strong> - Професионални съвети за най-добър резултат</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="guide-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h3>Приготвяйте и се наслаждавайте</h3>
+                                <p>Следвайте инструкциите стъпка по стъпка. Всяка рецепта е:</p>
+                                <ul>
+                                    <li>✅ Тествана и оптимизирана</li>
+                                    <li>✅ С ясни и прости стъпки</li>
+                                    <li>✅ Създадена за максимална енергия и баланс</li>
+                                    <li>✅ Подходяща за натоварено ежедневие</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="info-tips">
+                            <h3>💡 Професионални съвети:</h3>
+                            <ul>
+                                <li><strong>Планирайте предварително</strong> - Прегледайте рецептите вечерта преди и си подгответе съставките</li>
+                                <li><strong>Експериментирайте</strong> - Не се страхувайте да адаптирате рецептите според вкуса си</li>
+                                <li><strong>Качествени съставки</strong> - Използвайте най-качествените съставки, които можете да си позволите</li>
+                                <li><strong>Консистентност</strong> - Най-добрите резултати идват от редовното хранене по този начин</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="info-note">
+                            <p><strong>Забележка:</strong> Всички рецепти са създадени с фокус върху метаболитната оптимизация, устойчива енергия и хранителен баланс. Те са част от холистичен подход към здравословното хранене.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about-section" class="content-section">
+            <div class="section-container">
+                <div class="about-content">
+                    <h2 class="section-title">За мен</h2>
+                    <div class="about-text">
+                        <p class="lead-paragraph">
+                            Аз съм Вили Вилс – родена в малък град в северна България, професионален спортист и майка на две деца.
+                        </p>
+                        <p>
+                            Завърших Спортно училище като професионален спортист, където развих дълбока страст към спорта и разбиране за ключовата роля на здравословната храна в постигането на резултати.
+                        </p>
+                        <p>
+                            В момента съумявам да се справям с ежедневните предизвикателства на майчинството, като същевременно поддържам енергия и баланс чрез принципите, които споделям в тази книга.
+                        </p>
+                        <p class="highlight-text">
+                            Тази книга е резултат от моя личен път – от хаоса към баланса, от умората към енергията, от "нямам време" към "давам си приоритет".
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Recipe Modal -->
+    <div id="recipe-modal" class="modal">
+        <div class="modal-overlay" onclick="closeRecipeModal()"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeRecipeModal()">×</button>
+            <div id="modal-recipe-content">
+                <!-- Recipe details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">© 2025 Вили Вилс. Всички права запазени.</p>
+            <p class="footer-subtitle">Сутрешният Код - 79 Метаболитни Рецепти</p>
+        </div>
+    </footer>
+
+    <script src="complete_recipes.js"></script>
+    <script src="chapter_summaries.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
