@@ -506,7 +506,7 @@ function showLunchCategory(categoryId) {
     
     // Вземаме рецептите
     const recipes = recipesData[categoryId] || [];
-    console.log(`📊 Намерени ${recipes.length} рецепти за ${categoryId}`);
+    console.log(`🔍 Намерени ${recipes.length} рецепти за ${categoryId}`);
     
     filteredRecipes = recipes;
     renderRecipes(recipes);
@@ -557,7 +557,7 @@ function showEveningCategory(categoryId) {
     
     // Вземаме рецептите
     const recipes = recipesData[categoryId] || [];
-    console.log(`📊 Намерени ${recipes.length} рецепти за ${categoryId}`);
+    console.log(`🔍 Намерени ${recipes.length} рецепти за ${categoryId}`);
     
     filteredRecipes = recipes;
     renderRecipes(recipes);
